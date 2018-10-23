@@ -4,8 +4,8 @@
 #include "COMPARE.c"
 #include "doalg.c"
 int main(){
-    int N = 10000;
-    int K = 40;
+    int N = 1000;
+    int K = 100;
     int Best[MAXK];
     int k,n,flag,round,ct,loop,biggest,total;
 

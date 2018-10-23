@@ -1,53 +1,74 @@
 
-void Swap(int* a, int*b) {
-	int tmp = *a;
-	*a = *b;
-	*b = tmp;
+void Heapify(int* heap, int k, int i) {
+	// minHeap heapify
+	int Parent = i;
+	int leftChild = i*2 + 1;
+	int rightChild = i*2 + 2;
+	int tmp, newChild;
+
+	if (rightChild < k) {
+		if (COMPARE(heap[leftChild], heap[rightChild]) == 1)
+			tmp = rightChild;
+		else
+			tmp = leftChild;
+	}	
+	else if (leftChild < k)
+		tmp = leftChild;
+	else 
+		tmp = Parent;
+
+	if (tmp != Parent && COMPARE(heap[Parent], heap[tmp]) == 1)
+		Parent = tmp;
+
+	if (Parent != i) {
+		newChild = heap[i];
+		heap[i] = heap[Parent];
+		heap[Parent] = newChild;
+		Heapify(heap, k, Parent);
+	}
+
 }
 
-int Partition(int* indexArray, int left, int right, int pivotPos, int k) {
-	int pivot = indexArray[pivotPos];
-	int largerIndex = left;
+void HeapInit(int* heap, int k) {
 	int i;
-	Swap(&indexArray[pivotPos], &indexArray[right]);
-	for (i=left; i<right; i++) {
-		if (COMPARE(indexArray[i], pivot) == 1) {
-			Swap(&indexArray[largerIndex], &indexArray[i]);
-			largerIndex++;
-		}
+	for (i=k/2; i>0; i--) {
+		Heapify(heap, k, i-1);
 	}
-	Swap(&indexArray[right], &indexArray[largerIndex]);	
-	return largerIndex;
 }
 
-void QuickSort(int* indexArray, int left, int right, int k) {
-	if (left >= right)
-		return;
-	int pivotPos = (left+right)/2;
-	int newPivotPos = Partition(indexArray, left, right, pivotPos, k);
-	// if the size of larger subset is larger than k, then do QS on it only
-	if (newPivotPos >= k) {
-		QuickSort(indexArray, left, newPivotPos - 1, k);
-	}
-	else {
-		QuickSort(indexArray, left, newPivotPos - 1, k);
-		QuickSort(indexArray, newPivotPos + 1, right, k);
-	}
+int Pop(int* heap, int* size) {
+	int result = heap[0];
+	(*size)--;
+	heap[0] = heap[*size];
+	Heapify(heap, *size, 0);
+	return result;
 }
 
 int doalg(int n, int k, int* Best){
-	int* indexArray = (int*)malloc(sizeof(int)*n);
+	// allocate a memory, which k-int size, to store the minHeap
+	int* heap = (int*)malloc(sizeof(int)*k);
+	int size = k;
 	int i;
-	for (i=0; i<n; i++) {
-		indexArray[i] = i + 1;
+	for (i=0; i<k; i++) {
+		heap[i] = i + 1;
 	}
 
-	QuickSort(indexArray, 0, n-1, k);
+	// initialize a minHeap for the first k numbers
+	HeapInit(heap, size);
 	
-	for (i=0; i<k; i++)
-		Best[i] = indexArray[i];
+	for (i=k+1; i<=n; i++) {
+		if (COMPARE(i, heap[0]) == 1) {
+			heap[0] = i;
+			Heapify(heap, k , 0);
+		}
+	}
 
-	free(indexArray);
+	for (i=k-1; i>=0; i--) {
+		Best[i] = Pop(heap, &size);
+		//printf("%d\n", Best[i]);
+	}
+
+	free(heap);
     return 1;
 }
 

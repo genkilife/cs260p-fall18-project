@@ -29,8 +29,13 @@ int main(){
 		dp[i] = new int[n+1];
 	}
 
-	string res = LCS(n, dp, xChar, yChar);	
-	cout << "LCS string: " << res << endl;
+	int lcsLen = LCS(n, dp, xChar, yChar);	
+	cout << "LCS string length: " << lcsLen << endl;
+
+
+
+
+
 
 	delete [] xChar;
 	delete [] yChar;

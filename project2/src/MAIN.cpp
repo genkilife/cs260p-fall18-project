@@ -18,12 +18,25 @@ int main(){
 	cout << "binstring (n,x): " << xStr << endl;
 	cout << "binstring (n,y): " << yStr << endl;
 
-	char xChar[n];
-	char yChar[n];
+	char* xChar = new char[n];
+	char* yChar = new char[n];
 
 	strcpy(xChar, xStr.c_str());
 	strcpy(yChar, yStr.c_str());
 
-	string res = LCS(n, xChar, yChar);	
+	int** dp = new int*[n+1];
+	for(int i=0; i<n+1; i++){
+		dp[i] = new int[n+1];
+	}
+
+	string res = LCS(n, dp, xChar, yChar);	
 	cout << "LCS string: " << res << endl;
+
+	delete [] xChar;
+	delete [] yChar;
+	for(int i=0; i<n+1; i++){
+		delete [] dp[i];
+	}
+	delete [] dp;
+	return 0;
 }

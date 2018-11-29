@@ -6,8 +6,7 @@ int max(int a, int b) {
 	return (a > b)? a : b;
 }
 
-string LCS(int n, char* x, char* y) {
-	int dp[n+1][n+1];
+string LCS(int n, int** dp, char* x, char* y) {
 	int i, j;
 	string res = "";
 
@@ -35,6 +34,7 @@ string LCS(int n, char* x, char* y) {
 
 
 	cout << dp[n][n] << endl;
+	cout<<"return from loop"<<endl;
 	return res;
 }
 

@@ -3,7 +3,7 @@
 #include <bitset>
 #include <cstring>
 #include <string>
-#include "doalg.c"
+#include "doalg.cpp"
 
 using namespace std;
 

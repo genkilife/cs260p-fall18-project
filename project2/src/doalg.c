@@ -1,4 +1,6 @@
 #include <iostream>
+#include <vector>
+#include <set>
 
 using namespace std;
 
@@ -6,10 +8,8 @@ int max(int a, int b) {
 	return (a > b)? a : b;
 }
 
-string LCS(int n, char* x, char* y) {
-	int dp[n+1][n+1];
+void LCS(int n, char* x, char* y, int dp[][]) {
 	int i, j;
-	string res = "";
 
 	for (i=0; i<=n; i++)
 		dp[i][0] = 0;
@@ -26,16 +26,31 @@ string LCS(int n, char* x, char* y) {
 		}
 	}
 
-	for (i=0; i<=n; i++) {
-		for (j=0; j<=n; j++) {
-			cout << dp[i][j] << " ";
-		}
-		cout << endl;
-	}
-
-
 	cout << dp[n][n] << endl;
-	return res;
 }
 
+set<string> findLCS(string x, string y, int m, int n, int dp[][]) {
+	set<string> s;
+
+	if (m == 0 || n == 0) {
+		s.insert("");
+		return s;
+	}
+	
+	if (x[m-1] == y[n-1]) {
+		set<string> tmp = findLCS(x, y, m-1, n-1, dp[][n]);
+		
+		for (string str : tmp)
+			s.insert(str+x[m-1]);
+	} else {
+		if (dp[m-1][n] >= dp[m][n-1]) 
+			s = findLCS(x, y, m-1, n);
+
+		if (dp[m][n-1] >= dp[m-1][n]) {
+			set<string> tmp = findLCS(x, y, m, n-1, dp[size][size]);
+			s.insert(tmp.begin(), tmp.end());
+		}
+	}
+	return s;
+}
 

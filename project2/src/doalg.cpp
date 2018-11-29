@@ -1,4 +1,5 @@
 #include <iostream>
+#include <set>
 
 using namespace std;
 
@@ -36,4 +37,31 @@ int LCS(int n, int** dp, char* x, char* y) {
 	return dp[n][n];
 }
 
+void findAllLCS(int posX, int posY, int** dp, const int& maxLCSLen , char* x, char* y, set <string> & res, string& stack) {
+	if(posX == 0 || posY == 0){
+		if(stack.length() == maxLCSLen){
+			res.insert(stack);
+		}
+		return;
+	}
 
+	if(min(posX, posY) + dp[posX][posY] + stack.length() < maxLCSLen){
+		return;
+	}
+
+	if (x[posX-1] == y[posY-1]){
+		stack.insert(0, 1, x[posX-1]);
+		findAllLCS(posX-1, posY-1, dp, maxLCSLen, x, y, res, stack);
+		stack.erase(0, 1);
+	}
+	else {
+		int maxMatch = max(dp[posX-1][posY], dp[posX][posY-1]);
+		if(dp[posX-1][posY] == maxMatch){
+			findAllLCS(posX-1, posY, dp, maxLCSLen, x, y, res, stack);
+		}
+		if(dp[posX][posY-1] == maxMatch){
+			findAllLCS(posX, posY-1, dp, maxLCSLen, x, y, res, stack);
+		}
+	}
+	return;
+}

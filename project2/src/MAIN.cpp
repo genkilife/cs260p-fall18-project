@@ -32,10 +32,13 @@ int main(){
 	int lcsLen = LCS(n, dp, xChar, yChar);	
 	cout << "LCS string length: " << lcsLen << endl;
 
+	set<string> res;
+	string stack;
+	findAllLCS(n, n, dp, lcsLen, xChar, yChar, res, stack);
 
-
-
-
+	for(set<string>::iterator iter = res.begin(); iter != res.end(); iter++){
+		cout<<"Longest string: "<< *iter <<endl;
+	}
 
 	delete [] xChar;
 	delete [] yChar;

@@ -7,7 +7,7 @@ int max(int a, int b) {
 	return (a > b)? a : b;
 }
 
-int LCS(int n, int** dp, char* x, char* y) {
+int LCS_YK(int n, int** dp, char* x, char* y) {
 	int i, j;
 
 	for (i=0; i<=n; i++)
@@ -25,15 +25,15 @@ int LCS(int n, int** dp, char* x, char* y) {
 		}
 	}
 
+	#ifdef PRINT
 	for (i=0; i<=n; i++) {
 		for (j=0; j<=n; j++) {
 			cout << dp[i][j] << " ";
 		}
 		cout << endl;
 	}
-
-
 	cout << dp[n][n] << endl;
+	#endif
 	return dp[n][n];
 }
 
@@ -45,7 +45,7 @@ void findAllLCS(int posX, int posY, int** dp, const int& maxLCSLen , char* x, ch
 		return;
 	}
 
-	if(min(posX, posY) + dp[posX][posY] + stack.length() < maxLCSLen){
+	if( dp[posX][posY] + stack.length() < maxLCSLen){
 		return;
 	}
 

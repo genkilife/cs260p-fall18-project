@@ -29,7 +29,7 @@ int main(){
 		dp[i] = new int[n+1];
 	}
 
-	int lcsLen = LCS(n, dp, xChar, yChar);	
+	int lcsLen = LCS_YK(n, dp, xChar, yChar);	
 	cout << "LCS string length: " << lcsLen << endl;
 
 	set<string> res;

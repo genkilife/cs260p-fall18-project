@@ -77,7 +77,7 @@ int main(){
 		cout<<"Begin WL LCS"<<endl;
 		#endif
 
-		LCS_WL(n, xChar, yChar);	
+		LCS(n, xChar, yChar);	
 
 		set<string> res_WL;
 		res_WL = getLCS(xStr, yStr, n, n);
@@ -102,7 +102,7 @@ int main(){
 		delete [] dp;
 		
 		count--;
-		cout<<"Finish test "<<count<<endl;
+		cout<<"Finish test "<<count<< " length: "<<n<<endl;
 	}
 	cout<<"Pass test!\n";
 	return 0;

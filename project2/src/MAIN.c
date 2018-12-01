@@ -1,9 +1,11 @@
 #include <stdio.h>
+#include <algorithm>
 #include <stdlib.h>
 #include <iostream>
 #include <cstring>
 #include <string>
 #include <set>
+#include <cctype>
 #include <math.h>
 #include "doalg.c"
 
@@ -12,7 +14,6 @@ using namespace std;
 string decToBin(int num, int n) {
 	char numBin[n];
 
-	cout << num;
 	int i = n-1;
 	while (i>=0) {
 		if (num % 2 == 1)
@@ -23,7 +24,7 @@ string decToBin(int num, int n) {
 		i--;
 	}
 
-	string numBinStr(numBin);
+	string numBinStr = numBin;
 	return numBinStr;
 }
 
@@ -44,14 +45,25 @@ bool valueCheck(string str, bool isN, int n) {
 		return true;
 }
 
+inline string trim(const string &s)
+{
+	auto wsfront=find_if_not(s.begin(),s.end(),[](int c) {return isspace(c);});
+	auto wsback=find_if_not(s.rbegin(),s.rend(),[](int c) {return isspace(c);}).base();
+	return (wsback<=wsfront ? string() : string(wsfront,wsback));
+}
+
 int main(){
 	string n, x, y;
 	cout << "Please input n, the length of binstring, which is in the range [3:20]: " << endl;
-	cin >> n;
+	getline(cin, n);
 	cout << "Please input an integer x, which is in the range [0:2^n-1]: " << endl;
-	cin >> x;
+	getline(cin, x);
 	cout << "Please input another integer y, which is in the range [0:2^n-1]: " << endl;
-	cin >> y;
+	getline(cin, y);
+
+	n = trim(n);
+	x = trim(x);
+	y = trim(y);
 	
 	if (!valueCheck(n, true, 0)) {
 		cout << "The integer n you input is not available." << endl;

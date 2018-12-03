@@ -4,10 +4,17 @@
 #include <cstring>
 #include <string>
 #include <cmath>
-#include "doalg.cpp"
-#include "doalg.c"
+#include <set>
 
 using namespace std;
+
+// WL's function header
+void LCS(int, char*, char*);
+set<string> getLCS(string, string, int, int);
+
+// YK's function header
+int LCS_YK(int, int**, char*, char*);
+void findAllLCS(int, int, int**, const int&, char*, char*, set <string> &, string&);
 
 string decToBin(int num, int n) {
 	char numBin[n];

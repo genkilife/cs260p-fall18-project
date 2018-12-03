@@ -7,9 +7,17 @@
 #include <set>
 #include <cctype>
 #include <math.h>
-#include "doalg.c"
 
 using namespace std;
+
+
+// WL's function header
+void LCS(int, char*, char*);
+set<string> getLCS(string, string, int, int);
+
+// YK's function header
+int LCS_YK(int, int**, char*, char*);
+void findAllLCS(int, int, int**, const int&, char*, char*, set <string> &, string&);
 
 string decToBin(int num, int n) {
 	char numBin[n];

@@ -32,7 +32,7 @@ string decToBin(int num, int n) {
 		i--;
 	}
 
-	string numBinStr = numBin;
+	string numBinStr(numBin, n);
 	return numBinStr;
 }
 
@@ -125,6 +125,7 @@ int main(){
 		for (set<string>::iterator it=res.begin(); it!=res.end(); ++it) {
 			cout << *it << endl;
 		}
+		cout<<"-------------------------------"<<endl<<endl;
 	}
 }
 

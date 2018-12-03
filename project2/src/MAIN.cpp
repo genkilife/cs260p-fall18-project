@@ -62,56 +62,69 @@ inline string trim(const string &s)
 
 int main(){
 	string n, x, y;
-	cout << "Please input n, the length of binstring, which is in the range [3:20]: " << endl;
-	getline(cin, n);
-	cout << "Please input an integer x, which is in the range [0:2^n-1]: " << endl;
-	getline(cin, x);
-	cout << "Please input another integer y, which is in the range [0:2^n-1]: " << endl;
-	getline(cin, y);
 
-	n = trim(n);
-	x = trim(x);
-	y = trim(y);
-	
-	if (!valueCheck(n, true, 0)) {
-		cout << "The integer n you input is not available." << endl;
-		return -1;
-	}
+	while(1){
+		cout << "Please give an input. Use Ctrl+C to terminate the program."<<endl;
+		while(1){
+			cout << "Please input n, the length of binstring, which is in the range [3:20]: " << endl;
+			getline(cin, n);
+			n = trim(n);
+			if (!valueCheck(n, true, 0)) {
+				cout << "The integer n you input is not available. Please retype input in correct format." << endl;
+			} else{
+				break;
+			}
+		}
+		
+		int nInt = stoi(n);
+		
+		while(1){
+			cout << "Please input an integer x, which is in the range [0:2^n-1]: " << endl;
+			getline(cin, x);
+			x = trim(x);
+			if (!valueCheck(x, false, nInt)) {
+				cout << "The integer x you input is not available. Please retype input in correct format." << endl;
+			} else{
+				break;
+			}
+		}
 
-	int nInt = stoi(n);
-	if (!valueCheck(x, false, nInt)) {
-		cout << "The integer x you input is not available." << endl;
-		return -1;
-	}
-	if (!valueCheck(y, false, nInt)) {
-		cout << "The integer y you input is not available." << endl;
-		return -1;
-	}
+		while(1){
+			cout << "Please input another integer y, which is in the range [0:2^n-1]: " << endl;
+			getline(cin, y);
+			y = trim(y);
+			if (!valueCheck(y, false, nInt)) {
+				cout << "The integer y you input is not available. Please retype input in correct format." << endl;
+			} else{
+				break;
+			}
+		}
 
-	int xInt = stoi(x);
-	int yInt = stoi(y);
-	string xBinStr, yBinStr;
-	xBinStr = decToBin(xInt, nInt);
-	yBinStr = decToBin(yInt, nInt);
+		int xInt = stoi(x);
+		int yInt = stoi(y);
+		string xBinStr, yBinStr;
+		xBinStr = decToBin(xInt, nInt);
+		yBinStr = decToBin(yInt, nInt);
 
-	char xChar[nInt+1];
-	char yChar[nInt+1];
-	strcpy(xChar, xBinStr.c_str());  
-	strcpy(yChar, yBinStr.c_str());
+		char xChar[nInt+1];
+		char yChar[nInt+1];
+		strcpy(xChar, xBinStr.c_str());  
+		strcpy(yChar, yBinStr.c_str());
 
-	LCS(nInt, xChar, yChar);	
+		LCS(nInt, xChar, yChar);	
 
-	set<string> res;
-	res = getLCS(xBinStr, yBinStr, nInt, nInt);
+		set<string> res;
+		res = getLCS(xBinStr, yBinStr, nInt, nInt);
 
-	// display
-	cout << "The input parameters (n, x, y): " << "(" << nInt << ", " << xInt << ", " << yInt << ")" << endl;
-	cout << "binstring(n, x): " << xBinStr << endl;
-	cout << "binstring(n, y): " << yBinStr << endl;
-	cout << "The determined number of distinct LCS's: " << res.size() << endl;
-	cout << "The list of those LCS's: " << endl;
-	for (set<string>::iterator it=res.begin(); it!=res.end(); ++it) {
-		cout << *it << endl;
+		// display
+		cout << "The input parameters (n, x, y): " << "(" << nInt << ", " << xInt << ", " << yInt << ")" << endl;
+		cout << "binstring(n, x): " << xBinStr << endl;
+		cout << "binstring(n, y): " << yBinStr << endl;
+		cout << "The determined number of distinct LCS's: " << res.size() << endl;
+		cout << "The list of those LCS's: " << endl;
+		for (set<string>::iterator it=res.begin(); it!=res.end(); ++it) {
+			cout << *it << endl;
+		}
 	}
 }
 

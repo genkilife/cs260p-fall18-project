@@ -47,7 +47,7 @@ bool valueCheck(string str, bool isN, int n) {
 	int val = stoi(str);
 	if (isN && (val < 3 || val > 20)) 
 		return false;
-	else if (!isN && (val < 0 || val >= pow(2, n)))
+	else if (!isN && (val < 0 || val >= (1<<n)))
 		return false;
 	else
 		return true;

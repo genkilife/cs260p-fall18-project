@@ -3,13 +3,18 @@
 #include <bitset>
 #include <cstring>
 #include <string>
+#include <set>
 
 using namespace std;
+//
+// YK's function header
+int LCS_YK(int, int**, char*, char*);
+void findAllLCS(int, int, int**, const int&, char*, char*, set <string> &, string&);
 
 int main(){
-    const int n = 12; // n in range [3:20]
-    const int x = 1025;
-	const int y = 4923;
+    const int n = 20; // n in range [3:20]
+    const int x = 1048475;
+	const int y = 524288;
 
 	string xStr = bitset<n> (x).to_string();
 	string yStr = bitset<n> (y).to_string();

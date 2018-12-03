@@ -111,10 +111,22 @@ int main(){
 		strcpy(xChar, xBinStr.c_str());  
 		strcpy(yChar, yBinStr.c_str());
 
+		/* Comment out WL's algo
 		LCS(nInt, xChar, yChar);	
 
 		set<string> res;
 		res = getLCS(xBinStr, yBinStr, nInt, nInt);
+		*/
+
+		int** dp = new int*[nInt+1];
+		for(int i=0; i<nInt+1; i++){
+			dp[i] = new int[nInt+1];
+		}
+		int lcsLen = LCS_YK(nInt, dp, xChar, yChar);
+		set<string> res;
+		string stack;
+		findAllLCS(nInt, nInt, dp, lcsLen, xChar, yChar, res, stack);
+
 
 		// display
 		cout << "The input parameters (n, x, y): " << "(" << nInt << ", " << xInt << ", " << yInt << ")" << endl;
@@ -126,6 +138,12 @@ int main(){
 			cout << *it << endl;
 		}
 		cout<<"-------------------------------"<<endl<<endl;
+
+		for(int i=0; i<nInt+1; i++){
+			delete [] dp[i];
+		}
+		delete [] dp;
+
 	}
 }
 

@@ -40,7 +40,9 @@ int LCS_YK(int n, int** dp, char* x, char* y) {
 void findAllLCS(int posX, int posY, int** dp, const int& maxLCSLen , char* x, char* y, set <string> & res, string& stack) {
 	if(posX == 0 || posY == 0){
 		if(stack.length() == maxLCSLen){
-			res.insert(stack);
+			if(stack.length()!=0){
+				res.insert(stack);
+			}
 		}
 		return;
 	}

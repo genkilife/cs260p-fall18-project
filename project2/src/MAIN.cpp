@@ -37,6 +37,10 @@ string decToBin(int num, int n) {
 }
 
 bool valueCheck(string str, bool isN, int n) {
+    if(str.length()==0){
+        return false;
+    }
+
 	int i;
 	string numStr = "1234567890";
 	for (i=0; i<str.size(); i++) {
@@ -139,15 +143,18 @@ int main(){
 
 
 		// display
+        cout << endl;
 		cout << "The input parameters (n, x, y): " << "(" << nInt << ", " << xInt << ", " << yInt << ")" << endl;
 		cout << "binstring(n, x): " << xBinStr << endl;
 		cout << "binstring(n, y): " << yBinStr << endl;
+        cout << "The length of LCS: "<< dp[nInt][nInt] << endl;
 		cout << "The determined number of distinct LCS's: " << res.size() << endl;
 		cout << "The list of those LCS's: " << endl;
 		for (set<string>::iterator it=res.begin(); it!=res.end(); ++it) {
 			cout << *it << endl;
 		}
-		cout<<"-------------------------------"<<endl<<endl;
+        cout<<"----------------------------------------------------";
+        cout<<endl<<endl;
 
 		for(int i=0; i<nInt+1; i++){
 			delete [] dp[i];

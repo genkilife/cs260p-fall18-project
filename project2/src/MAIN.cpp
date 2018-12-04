@@ -44,6 +44,16 @@ bool valueCheck(string str, bool isN, int n) {
 			return false;
 	}
 
+	int maxStrLen;
+	if(isN){
+		maxStrLen = 2;
+	} else{
+		maxStrLen = to_string((1 << n)-1).length();
+	}
+	if(str.length() > maxStrLen){
+		return false;
+	}
+
 	int val = stoi(str);
 	if (isN && (val < 3 || val > 20)) 
 		return false;

@@ -19,6 +19,9 @@ set<string> getLCS(string, string, int, int);
 int LCS_YK(int, int**, char*, char*);
 void findAllLCS(int, int, int**, const int&, char*, char*, set <string> &, string&);
 
+// Opt's function header
+int LCS_OPT(int , int** , char* , char* , set<string>**);
+
 string decToBin(int num, int n) {
 	char numBin[n];
 
@@ -133,13 +136,18 @@ int main(){
 		*/
 
 		int** dp = new int*[nInt+1];
+		set<string>** setStr = new set<string>*[nInt+1];
 		for(int i=0; i<nInt+1; i++){
 			dp[i] = new int[nInt+1];
+		    setStr[i] = new set<string>[nInt+1];
 		}
-		int lcsLen = LCS_YK(nInt, dp, xChar, yChar);
-		set<string> res;
-		string stack;
-		findAllLCS(nInt, nInt, dp, lcsLen, xChar, yChar, res, stack);
+		//int lcsLen = LCS_YK(nInt, dp, xChar, yChar);
+		//set<string> res;
+		//string stack;
+		//findAllLCS(nInt, nInt, dp, lcsLen, xChar, yChar, res, stack);
+
+		int lcsLenOpt = LCS_OPT(nInt, dp, xChar, yChar, setStr);
+		set<string> res = setStr[nInt][nInt];
 
 
 		// display
